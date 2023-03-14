@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/card-elimination/static/css/main.d1a298d1.css",
+    "main.js": "/card-elimination/static/js/main.e172aca2.js",
+    "index.html": "/card-elimination/index.html",
+    "main.d1a298d1.css.map": "/card-elimination/static/css/main.d1a298d1.css.map",
+    "main.e172aca2.js.map": "/card-elimination/static/js/main.e172aca2.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d1a298d1.css",
+    "static/js/main.e172aca2.js"
+  ]
+}
