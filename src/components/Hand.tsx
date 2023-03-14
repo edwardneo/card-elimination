@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Card } from './Card';
 
-export function Hand() {
+interface HandProps {
+  hand: string[];
+}
+
+export function Hand({ hand }: HandProps) {
   return (
     <div id="hand">
-      <Card label="yellow" />
-      <Card label="yellow" />
-      <Card label="yellow" />
-      <Card label="yellow" />
+      {hand ? hand.map(card => <Card color={card} />) : null}
     </div>
   )
 }
