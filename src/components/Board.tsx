@@ -18,7 +18,7 @@ export function Board({ board, takeCard }: BoardProps) {
 
   return (
     <div id='board'>
-      {board.map((cardColors, index) => <Row cardColors={cardColors} takeCard={() => takeCard(index)} />)}
+      {board.map((cardColors, index) => <Row key={index} cardColors={cardColors} takeCard={() => takeCard(index)} />)}
     </div>
   )
 }
@@ -33,10 +33,12 @@ function Row({ cardColors, takeCard }: RowProps) {
     const cards = [];
 
     for (let i = 0; i < cardColors.length - 1; i++) {
-      cards.push(<Card color={cardColors[i]} />);
+      cards.push(<Card key={cards.length} color={cardColors[i]} />);
     }
-    if (cardColors) {
-      cards.push(<Card color={cardColors[cardColors.length - 1]} onClick={takeCard}/>);
+    if (cardColors.length != 0) {
+      cards.push(<Card key={cards.length} color={cardColors[cardColors.length - 1]} onClick={takeCard}/>);
+    } else {
+      cards.push(<Card key={cards.length} />);
     }
 
     return cards

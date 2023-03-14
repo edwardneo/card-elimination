@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import "./App.css";
 
 import { Board } from "./components/Board";
-import { Hand } from "./components/Hand";
+import { Hand, HandObject } from "./components/Hand";
 
 function App() {
   const startingBoards = [
@@ -16,7 +16,7 @@ function App() {
 
   const colors = ['red', 'green', 'blue', 'yellow', 'violet', 'orange', 'cyan'];
 
-  const startingHand: string[] = [];
+  const startingHand: HandObject = colors.reduce((obj, color) => ({ ...obj, [color]: 0 }), {});
 
   const processBoard = (board: string[]) => {
     return board.map((stack: string) => stack.split("").map(cardChar => colors[parseInt(cardChar) - 1]))
@@ -24,20 +24,30 @@ function App() {
 
   const [board, setBoard] = useState(processBoard(startingBoards[0]));
   const [hand, setHand] = useState(startingHand);
+  const [moves, setMoves] = useState("");
 
   const takeCard = (rowId: number) => {
-    const boardCopy = board.map(row => [...row])
-    const newCard = boardCopy[rowId].pop();
-    if (newCard) {
-      const handCopy = [...hand];
-      handCopy.push(newCard);
-      setHand(handCopy);
+    const boardCopy = board.map(row => [...row]);
+    if (0 <= rowId && rowId < board.length) {
+      const newCard = boardCopy[rowId].pop();
+      if (newCard) {
+        const handCopy = {...hand};
+        handCopy[newCard]++;
+
+        if (handCopy[newCard] == 3) {
+          handCopy[newCard] = 0;
+        }
+
+        setHand(handCopy);
+        setBoard(boardCopy);
+        setMoves(moves + rowId.toString());
+      }
     }
-    setBoard(boardCopy);
   }
 
   return (
     <div id="app">
+      {board.every(row => row.length == 0) ? `You won! Move order: ${moves}` : null}
       <Board board={board} takeCard={takeCard} />
       <Hand hand={hand} />
     </div>
