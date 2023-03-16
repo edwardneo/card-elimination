@@ -1,2 +1,0 @@
-#app{align-items:center;display:flex;flex-direction:column}#board{flex-direction:column;justify-content:space-evenly;padding:10px 0}#board,#hand{align-items:center;border:1px solid;border-radius:20px;display:flex;margin:5px;width:1000px}#hand{flex-direction:row;height:200px;justify-content:center}.row{flex-direction:row;padding:5px 0;position:relative;width:90%}.card,.row{align-items:center;display:flex;height:160px}.card{border:1px solid;border-radius:10px;justify-content:center;margin:0 5px;width:120px}.stack{position:absolute}
-/*# sourceMappingURL=main.2f4f1e21.css.map*/
