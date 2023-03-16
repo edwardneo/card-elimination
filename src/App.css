@@ -30,10 +30,12 @@
 
 .row {
   width: 90%;
+  height: 160px;
   padding: 5px 0px;
   display: flex;
   flex-direction: row;
   align-items: center;
+  position: relative;
 }
 
 .card {
@@ -45,4 +47,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.stack {
+  position: absolute;
 }

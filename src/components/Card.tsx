@@ -1,14 +1,23 @@
 import React, { useState } from 'react';
 
 interface CardProps {
+  className?: string,
+  index?: number,
   color?: string,
   onClick?(): void
 }
 
-export function Card({ color, onClick }: CardProps) {
+export function Card({ className, index, color, onClick }: CardProps) {
+  const style = {
+    ...(color ? {backgroundColor: color} : {}),
+    ...(index ? {left: `${index * 75}px`} : {})
+  };
+
   return (
-    color ?
-    <div className="card" onClick={onClick ? onClick : () => {}} style={{backgroundColor: color}} /> :
-    <div className="card" onClick={onClick ? onClick : () => {}} />
+    <div
+      className={"card " + className}
+      onClick={onClick ? onClick : () => {}}
+      style={style}
+    />
   );
 }

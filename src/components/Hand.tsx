@@ -15,7 +15,10 @@ export function Hand({ hand }: HandProps) {
     const handCards = [];
     for (const color in hand) {
       for (let i = 0; i < hand[color]; i++) {
-        handCards.push(<Card key={handCards.length} color={color} />);
+        handCards.push(<Card
+          key={handCards.length}
+          color={color}
+        />);
       }
     }
     return handCards;

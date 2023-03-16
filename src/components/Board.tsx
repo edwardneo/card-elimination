@@ -33,12 +33,33 @@ function Row({ cardColors, takeCard }: RowProps) {
     const cards = [];
 
     for (let i = 0; i < cardColors.length - 1; i++) {
-      cards.push(<Card key={cards.length} color={cardColors[i]} />);
+      cards.push(
+        <Card
+          className="stack"
+          key={cards.length}
+          index={cards.length}
+          color={cardColors[i]}
+        />
+      );
     }
     if (cardColors.length != 0) {
-      cards.push(<Card key={cards.length} color={cardColors[cardColors.length - 1]} onClick={takeCard}/>);
+      cards.push(
+        <Card
+          className="stack"
+          key={cards.length}
+          index={cards.length}
+          color={cardColors[cardColors.length - 1]}
+          onClick={takeCard}
+        />
+      );
     } else {
-      cards.push(<Card key={cards.length} />);
+      cards.push(
+        <Card
+          className="stack"
+          key={cards.length}
+          index={cards.length}
+        />
+      );
     }
 
     return cards
