@@ -3,6 +3,7 @@ import "../css/Game.css";
 
 import { Board } from "../components/Board";
 import { Hand, HandObject } from "../components/Hand";
+import { EndPopup } from '../components/EndPopup';
 
 interface GameProps {
   boardArray: string[]
@@ -14,13 +15,14 @@ export function Game({ boardArray }: GameProps) {
   const startingHand: HandObject = colors.reduce((obj, color) => ({ ...obj, [color]: 0 }), {});
 
   const processBoard = (board: string[]) => {
-    return board.map((stack: string) => stack.split("").map(cardChar => colors[parseInt(cardChar) - 1]))
+    return board.map((stack: string) => stack.split("").map(cardChar => colors[parseInt(cardChar) - 1]));
   }
 
   const [board, setBoard] = useState(processBoard(boardArray));
   const [hand, setHand] = useState(startingHand);
   const [moves, setMoves] = useState("");
-  const [gameEnd, setGameEnd] = useState(false);
+  const [maxHand, setMaxHand] = useState(0);
+  const [gameEndPopup, setGameEndPopup] = useState(false);
 
   const takeCard = (rowId: number) => {
     const boardCopy = board.map(row => [...row]);
@@ -34,29 +36,27 @@ export function Game({ boardArray }: GameProps) {
           handCopy[newCard] = 0;
         }
 
+        setMaxHand(Math.max(maxHand, Object.keys(handCopy).reduce((total, key) => total + handCopy[key], 0)));
+
         setHand(handCopy);
         setBoard(boardCopy);
         setMoves(moves + rowId.toString());
       }
     }
 
-    setGameEnd(boardCopy.every(row => row.length === 0));
+    setGameEndPopup(boardCopy.every(row => row.length === 0));
     console.log(boardCopy.every(row => row.length === 0));
   }
 
   return (
     <div id="app">
       {
-        gameEnd ?
-        (
-          <p>
-            {`You won! Move order: ${moves}`}
-          </p>
-        ) :
+        gameEndPopup ?
+        (<EndPopup moveOrder={moves} maxHand={maxHand} />) :
         null
       }
       <Board board={board} takeCard={takeCard} />
-      <Hand hand={hand} />
+      <Hand hand={hand} maxHand={maxHand}/>
     </div>
   );
 }

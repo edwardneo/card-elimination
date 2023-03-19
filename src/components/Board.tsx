@@ -45,7 +45,7 @@ function Row({ cardColors, takeCard }: RowProps) {
     if (cardColors.length != 0) {
       cards.push(
         <Card
-          className="stack"
+          className="stack last-card"
           key={cards.length}
           index={cards.length}
           color={cardColors[cardColors.length - 1]}

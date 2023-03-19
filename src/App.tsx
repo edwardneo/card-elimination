@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Start } from './pages/Start';
 import { Game } from './pages/Game';
 
@@ -16,6 +16,10 @@ function App() {
 
   const [page, setPage] = useState<PageType>('start');
   const [setupIndex, setSetupIndex] = useState(0);
+
+  useEffect(() => {
+    document.title = 'Card Elimination';
+  }, []);
 
   const startGame = (setupIndex: number) => {
     setSetupIndex(setupIndex);

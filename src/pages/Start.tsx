@@ -24,11 +24,11 @@ export function Start({ numSetups, selectSetup }: StartProps) {
   }
 
   return (
-    <div className='startPage'>
+    <div className='start-page'>
       <h1 className='title'>Card Elimination</h1>
       <p className='instructions'>
-        Goal: Keep your maximum hand size low. <br />
-        How to play: Take cards from the top of the stacks and match three-of-a-kind of one color in your hand to eliminate them. <br />
+        <span className='bold'>Goal:</span> Keep your maximum hand size low. <br />
+        <span className='bold'>How to play:</span> Take cards from the top of the stacks and match three-of-a-kind of one color in your hand to eliminate them. <br />
         Choose one of the setups to get started!
       </p>
       <div className='setups'>

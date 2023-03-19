@@ -18,7 +18,7 @@
 
 #hand {
   width: 1000px;
-  height: 200px;
+  height: 210px;
   margin: 5px;
   border: 1px solid;
   border-radius: 20px;
@@ -26,12 +26,23 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+
+#max-hand-counter {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+#max-hand-counter > h5 {
+  margin: 10px;
 }
 
 .row {
   width: 90%;
   height: 160px;
-  padding: 5px 0px;
+  padding: 7px 0px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -39,8 +50,8 @@
 }
 
 .card {
-  width: 120px;
-  height: 160px;
+  width: 114px;
+  height: 152px;
   margin: 0px 5px;
   border: 1px solid;
   border-radius: 10px;
@@ -51,4 +62,61 @@
 
 .stack {
   position: absolute;
+}
+
+.last-card {
+  border: dashed 4px black;
+  cursor: pointer;
+}
+
+.last-card:hover {
+  filter: brightness(85%)
+}
+
+#end-popup {
+  width: 700px;
+  height: 800px;
+  margin: auto 0px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+
+#end-popup-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	max-width: unset !important;
+	z-index: 999;
+	background: rgba(0, 0, 0, 0.6);
+}
+
+#close-popup {
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  border: transparent;
+  border-radius: 25px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-weight: 300;
+	font-size: 30px;
+	vertical-align: sub;
+  cursor: pointer;
+}
+
+#close-popup:hover {
+  filter: brightness(85%);
 }

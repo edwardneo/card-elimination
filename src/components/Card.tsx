@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-
 interface CardProps {
   className?: string,
   index?: number,
@@ -15,7 +13,7 @@ export function Card({ className, index, color, onClick }: CardProps) {
 
   return (
     <div
-      className={"card " + className}
+      className={`card ${className}`}
       onClick={onClick ? onClick : () => {}}
       style={style}
     />
