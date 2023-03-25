@@ -1,17 +1,14 @@
+import { ReactNode } from 'react';
+
 interface EndPopupProps {
-  moveOrder: string;
-  maxHand: number;
+  children: ReactNode;
 }
 
-export function EndPopup({ moveOrder, maxHand }: EndPopupProps) {
+export function EndPopup({ children }: EndPopupProps) {
   return (
     <div>
       <div id='end-popup'>
-        <h1>Nice!</h1>
-        <h3>
-          Move Order: {moveOrder}<br />
-          Max Hand Used: {maxHand}
-        </h3>
+        {children}
       </div>
       <div id='end-popup-overlay' />
     </div>

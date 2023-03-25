@@ -1,0 +1,22 @@
+#end-title {
+  margin: 0;
+}
+
+#end-instructions {
+  margin: 20px 0;
+}
+
+#game-str-container {
+  border: solid 1px black;
+  border-radius: 10px;
+  padding: 50px;
+  position: relative;
+}
+
+#copy-btn {
+  position: absolute;
+  margin: 10px;
+  padding: 5px;
+  bottom: 0;
+  right: 0;
+}

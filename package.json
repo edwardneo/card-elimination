@@ -4,6 +4,7 @@
   "homepage": "https://edwardneo.github.io/card-elimination",
   "private": true,
   "dependencies": {
+    "@emotion-icons/boxicons-regular": "^3.19.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",

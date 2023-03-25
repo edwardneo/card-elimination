@@ -1,37 +1,51 @@
-import React, { useState, useEffect } from 'react';
-import { Start } from './pages/Start';
-import { Game } from './pages/Game';
+import { useState, useEffect } from 'react';
+import { StartPage } from './pages/StartPage';
+import { GamePage } from './pages/GamePage';
+import { EndPage } from './pages/EndPage';
+
+import './css/App.css';
+
+import { startingBoards } from './data/Setups';
 
 function App() {
-  const startingBoards = [
-    [
-      '131242',
-      '412323',
-      '142243',
-      '443131',
-    ]
-  ]
-
-  type PageType = 'start' | 'game';
+  type PageType = 'start' | 'game' | 'end';
 
   const [page, setPage] = useState<PageType>('start');
-  const [setupIndex, setSetupIndex] = useState(0);
+  const [setupIndex, setSetupIndex] = useState<number>(0);
+
+  const [moveOrders, setMoveOrders] = useState<string[]>([]);
+  const [maxHands, setMaxHands] = useState<number[]>([]);
 
   useEffect(() => {
     document.title = 'Card Elimination';
   }, []);
 
-  const startGame = (setupIndex: number) => {
-    setSetupIndex(setupIndex);
+  const startGame = () => {
+    setSetupIndex(0);
     setPage('game');
+  }
+
+  const addGameData = (moveOrder: string, maxHand: number) => {
+    setMoveOrders(moveOrders.concat([moveOrder]));
+    setMaxHands(maxHands.concat([maxHand]));
+  }
+
+  const nextSetup = (setupIndex: number) => {
+    if (setupIndex + 1 < startingBoards.length) {
+      setSetupIndex(setupIndex + 1);
+    } else {
+      setPage('end');
+    }
   }
 
   const renderPage = (page: PageType) => {
     switch(page) {
       case 'start':
-        return (<Start numSetups={startingBoards.length} selectSetup={startGame} />);
+        return (<StartPage startGame={startGame} />);
       case 'game':
-        return (<Game boardArray={startingBoards[setupIndex]} />);
+        return (<GamePage key={setupIndex} setupIndex={setupIndex} addGameData={addGameData} nextSetup={nextSetup} />);
+      case 'end':
+        return (<EndPage setups={startingBoards} moveOrders={moveOrders} maxHands={maxHands} />);
     }
   }
   

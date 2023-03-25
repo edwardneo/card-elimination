@@ -7,15 +7,6 @@ interface BoardProps {
 }
 
 export function Board({ board, takeCard }: BoardProps) {
-  const startingBoards = [
-    [
-      '131242',
-      '412323',
-      '142243',
-      '443131',
-    ]
-  ]
-
   return (
     <div id='board'>
       {board.map((cardColors, index) => <Row key={index} cardColors={cardColors} takeCard={() => takeCard(index)} />)}
