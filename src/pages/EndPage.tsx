@@ -3,28 +3,31 @@ import { Copy } from '@emotion-icons/boxicons-regular/Copy';
 
 import '../css/End.css';
 
+import { layouts, LayoutType } from '../data/Layouts';
+
 interface EndProps {
-  setups: string[][];
   moveOrders: string[];
   maxHands: number[];
 }
 
-export function EndPage({ setups, moveOrders, maxHands }: EndProps) {
-  const makeGameArr = (setups: string[][], moveOrders: string[], maxHands: number[]) => {
+export function EndPage({ moveOrders, maxHands }: EndProps) {
+  const formLink = 'https://forms.gle/En87Gkd5iZLaf5jS7';
+
+  const makeGameArr = (layouts: LayoutType[], moveOrders: string[], maxHands: number[]) => {
     const gameArr: string[] = [];
-    for (let i = 0; i < setups.length; i++) {
-      let setupStr = '';
-      setupStr += `${setups[i].length} ${setups[i][0].length} `;
-      setupStr += setups[i].reduce((setupStr, row) => setupStr + row, '');
+    for (let i = 0; i < layouts.length; i++) {
+      let layoutStr = '';
+      layoutStr += `${layouts[i].board.length} ${layouts[i].board[0].length} `;
+      layoutStr += layouts[i].board.reduce((layoutStr, row) => layoutStr + row, '');
       let dataStr = `${moveOrders[i]} ${maxHands[i]}`;
 
-      gameArr.push(setupStr);
+      gameArr.push(layoutStr);
       gameArr.push(dataStr);
     }
     return gameArr;
   }
 
-  const gameArr = makeGameArr(setups, moveOrders, maxHands);
+  const gameArr = makeGameArr(layouts, moveOrders, maxHands);
 
   return (
     <div className='page'>
@@ -32,7 +35,7 @@ export function EndPage({ setups, moveOrders, maxHands }: EndProps) {
         Thanks for playing!
       </h1>
       <p id='end-instructions'>
-        Please copy the text below and paste it into the following Google Form (logged into your Berkeley email): <a href='google.com'>google.com</a>
+        Please copy the text below and paste it into the following Google Form (logged into your Berkeley email): <a href={formLink} target="_blank" rel="noopener noreferrer">{formLink}</a>
       </p>
 
       <div id='game-str-container'>

@@ -5,15 +5,15 @@ import { Board } from "../components/Board";
 import { Hand, HandObject } from "../components/Hand";
 import { EndPopup } from '../components/EndPopup';
 
-import { startingBoards } from '../data/Setups';
+import { layouts } from '../data/Layouts';
 
 interface GameProps {
-  setupIndex: number;
+  layoutIndex: number;
   addGameData(moveOrder: String, maxHand: number): void;
-  nextSetup(setupIndex: number): void;
+  nextLayout(layoutIndex: number): void;
 }
 
-export function GamePage({ setupIndex, addGameData, nextSetup }: GameProps) {
+export function GamePage({ layoutIndex, addGameData, nextLayout }: GameProps) {
   const colors = ['red', 'green', 'blue', 'yellow', 'violet', 'orange', 'cyan'];
 
   const startingHand: HandObject = colors.reduce((obj, color) => ({ ...obj, [color]: 0 }), {});
@@ -22,7 +22,7 @@ export function GamePage({ setupIndex, addGameData, nextSetup }: GameProps) {
     return board.map((stack: string) => stack.split("").map(cardChar => colors[parseInt(cardChar) - 1]));
   }
 
-  const [board, setBoard] = useState(processBoard(startingBoards[setupIndex]));
+  const [board, setBoard] = useState(processBoard(layouts[layoutIndex].board));
   const [hand, setHand] = useState(startingHand);
   const [moves, setMoves] = useState("");
   const [maxHand, setMaxHand] = useState(0);
@@ -36,7 +36,7 @@ export function GamePage({ setupIndex, addGameData, nextSetup }: GameProps) {
         const handCopy = {...hand};
         handCopy[newCard]++;
 
-        if (handCopy[newCard] === 3) {
+        if (handCopy[newCard] === layouts[layoutIndex].elimNum) {
           handCopy[newCard] = 0;
         }
 
@@ -60,7 +60,7 @@ export function GamePage({ setupIndex, addGameData, nextSetup }: GameProps) {
   return (
     <div className='page'>
       <Board board={board} takeCard={takeCard} />
-      <Hand hand={hand} maxHand={maxHand}/>
+      <Hand hand={hand} maxHand={maxHand} />
       {
         gameEndPopup ?
         (<EndPopup>
@@ -69,9 +69,9 @@ export function GamePage({ setupIndex, addGameData, nextSetup }: GameProps) {
             Move Order: {moves}<br />
             Max Hand Used: {maxHand}
           </h3>
-          <button id='next-setup' onClick={() => nextSetup(setupIndex)}>
+          <button id='next-layout' onClick={() => nextLayout(layoutIndex)}>
             <p>
-              {setupIndex === startingBoards.length - 1 ? "End" : `Setup ${setupIndex + 2} of ${startingBoards.length}`}
+              {layoutIndex === layouts.length - 1 ? "End" : `Layout ${layoutIndex + 2} of ${layouts.length}`}
             </p>
           </button>
         </EndPopup>) :

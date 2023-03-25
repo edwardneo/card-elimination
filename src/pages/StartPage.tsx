@@ -1,7 +1,7 @@
 import React from "react";
 import '../css/Start.css'
 
-import { startingBoards } from "../data/Setups";
+import { layouts } from "../data/Layouts";
 
 interface StartProps {
   startGame(): void;

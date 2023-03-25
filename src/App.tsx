@@ -5,13 +5,13 @@ import { EndPage } from './pages/EndPage';
 
 import './css/App.css';
 
-import { startingBoards } from './data/Setups';
+import { layouts } from './data/Layouts';
 
 function App() {
   type PageType = 'start' | 'game' | 'end';
 
   const [page, setPage] = useState<PageType>('start');
-  const [setupIndex, setSetupIndex] = useState<number>(0);
+  const [layoutIndex, setLayoutIndex] = useState<number>(0);
 
   const [moveOrders, setMoveOrders] = useState<string[]>([]);
   const [maxHands, setMaxHands] = useState<number[]>([]);
@@ -21,7 +21,7 @@ function App() {
   }, []);
 
   const startGame = () => {
-    setSetupIndex(0);
+    setLayoutIndex(0);
     setPage('game');
   }
 
@@ -30,9 +30,9 @@ function App() {
     setMaxHands(maxHands.concat([maxHand]));
   }
 
-  const nextSetup = (setupIndex: number) => {
-    if (setupIndex + 1 < startingBoards.length) {
-      setSetupIndex(setupIndex + 1);
+  const nextLayout = (layoutIndex: number) => {
+    if (layoutIndex + 1 < layouts.length) {
+      setLayoutIndex(layoutIndex + 1);
     } else {
       setPage('end');
     }
@@ -43,9 +43,9 @@ function App() {
       case 'start':
         return (<StartPage startGame={startGame} />);
       case 'game':
-        return (<GamePage key={setupIndex} setupIndex={setupIndex} addGameData={addGameData} nextSetup={nextSetup} />);
+        return (<GamePage key={layoutIndex} layoutIndex={layoutIndex} addGameData={addGameData} nextLayout={nextLayout} />);
       case 'end':
-        return (<EndPage setups={startingBoards} moveOrders={moveOrders} maxHands={maxHands} />);
+        return (<EndPage moveOrders={moveOrders} maxHands={maxHands} />);
     }
   }
   
