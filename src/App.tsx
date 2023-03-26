@@ -14,7 +14,7 @@ function App() {
   const [layoutIndex, setLayoutIndex] = useState<number>(0);
 
   const [moveOrders, setMoveOrders] = useState<string[]>([]);
-  const [maxHands, setMaxHands] = useState<number[]>([]);
+  const [gameHands, setGameHands] = useState<number[][]>([]);
 
   useEffect(() => {
     document.title = 'Card Elimination';
@@ -25,9 +25,9 @@ function App() {
     setPage('game');
   }
 
-  const addGameData = (moveOrder: string, maxHand: number) => {
+  const addGameData = (moveOrder: string, handLengths: number[]) => {
     setMoveOrders(moveOrders.concat([moveOrder]));
-    setMaxHands(maxHands.concat([maxHand]));
+    setGameHands(gameHands.concat([handLengths]));
   }
 
   const nextLayout = (layoutIndex: number) => {
@@ -45,7 +45,7 @@ function App() {
       case 'game':
         return (<GamePage key={layoutIndex} layoutIndex={layoutIndex} addGameData={addGameData} nextLayout={nextLayout} />);
       case 'end':
-        return (<EndPage moveOrders={moveOrders} maxHands={maxHands} />);
+        return (<EndPage moveOrders={moveOrders} gameHands={gameHands} />);
     }
   }
   

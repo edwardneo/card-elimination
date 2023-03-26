@@ -9,7 +9,7 @@ import { layouts } from '../data/Layouts';
 
 interface GameProps {
   layoutIndex: number;
-  addGameData(moveOrder: String, maxHand: number): void;
+  addGameData(moveOrder: String, handLengths: number[]): void;
   nextLayout(layoutIndex: number): void;
 }
 
@@ -25,7 +25,7 @@ export function GamePage({ layoutIndex, addGameData, nextLayout }: GameProps) {
   const [board, setBoard] = useState(processBoard(layouts[layoutIndex].board));
   const [hand, setHand] = useState(startingHand);
   const [moves, setMoves] = useState("");
-  const [maxHand, setMaxHand] = useState(0);
+  const [handLengths, setHandLengths] = useState<number[]>([]);
   const [gameEndPopup, setGameEndPopup] = useState(false);
 
   const takeCard = (rowId: number) => {
@@ -40,8 +40,8 @@ export function GamePage({ layoutIndex, addGameData, nextLayout }: GameProps) {
           handCopy[newCard] = 0;
         }
 
-        const newMaxHand = Math.max(maxHand, Object.keys(handCopy).reduce((total, key) => total + handCopy[key], 0));
-        setMaxHand(newMaxHand);
+        const newHandLengths = handLengths.concat([Object.keys(handCopy).reduce((total, key) => total + handCopy[key], 0)]);
+        setHandLengths(newHandLengths);
 
         setHand(handCopy);
         setBoard(boardCopy);
@@ -51,7 +51,7 @@ export function GamePage({ layoutIndex, addGameData, nextLayout }: GameProps) {
 
         if (boardCopy.every(row => row.length === 0)) {
           setGameEndPopup(true);
-          addGameData(newMoves, newMaxHand);
+          addGameData(newMoves, newHandLengths);
         }
       }
     }
@@ -60,14 +60,15 @@ export function GamePage({ layoutIndex, addGameData, nextLayout }: GameProps) {
   return (
     <div className='page'>
       <Board board={board} takeCard={takeCard} />
-      <Hand hand={hand} maxHand={maxHand} />
+      <Hand hand={hand} maxHand={Math.max(...handLengths)} />
       {
         gameEndPopup ?
         (<EndPopup>
           <h1>Nice!</h1>
           <h3>
             Move Order: {moves}<br />
-            Max Hand Used: {maxHand}
+            Hand Lengths: {handLengths}<br />
+            Max Hand Used: {Math.max(...handLengths)}
           </h3>
           <button id='next-layout' onClick={() => nextLayout(layoutIndex)}>
             <p>

@@ -1,4 +1,3 @@
-import { ReactElement } from 'react';
 import { Copy } from '@emotion-icons/boxicons-regular/Copy';
 
 import '../css/End.css';
@@ -7,19 +6,19 @@ import { layouts, LayoutType } from '../data/Layouts';
 
 interface EndProps {
   moveOrders: string[];
-  maxHands: number[];
+  gameHands: number[][];
 }
 
-export function EndPage({ moveOrders, maxHands }: EndProps) {
+export function EndPage({ moveOrders, gameHands }: EndProps) {
   const formLink = 'https://forms.gle/En87Gkd5iZLaf5jS7';
 
-  const makeGameArr = (layouts: LayoutType[], moveOrders: string[], maxHands: number[]) => {
+  const makeGameArr = (layouts: LayoutType[], moveOrders: string[], gameHands: number[][]) => {
     const gameArr: string[] = [];
     for (let i = 0; i < layouts.length; i++) {
       let layoutStr = '';
       layoutStr += `${layouts[i].board.length} ${layouts[i].board[0].length} `;
       layoutStr += layouts[i].board.reduce((layoutStr, row) => layoutStr + row, '');
-      let dataStr = `${moveOrders[i]} ${maxHands[i]}`;
+      let dataStr = `${moveOrders[i]} ${gameHands[i].join('')} ${Math.max(...gameHands[i])}`;
 
       gameArr.push(layoutStr);
       gameArr.push(dataStr);
@@ -27,7 +26,7 @@ export function EndPage({ moveOrders, maxHands }: EndProps) {
     return gameArr;
   }
 
-  const gameArr = makeGameArr(layouts, moveOrders, maxHands);
+  const gameArr = makeGameArr(layouts, moveOrders, gameHands);
 
   return (
     <div className='page'>
