@@ -60,7 +60,7 @@ export function GamePage({ layoutIndex, addGameData, nextLayout }: GameProps) {
   return (
     <div className='page'>
       <Board board={board} takeCard={takeCard} />
-      <Hand hand={hand} maxHand={Math.max(...handLengths)} />
+      <Hand hand={hand} maxHand={handLengths.length === 0 ? 0 : Math.max(...handLengths)} />
       {
         gameEndPopup ?
         (<EndPopup>
@@ -68,7 +68,7 @@ export function GamePage({ layoutIndex, addGameData, nextLayout }: GameProps) {
           <h3>
             Move Order: {moves}<br />
             Hand Lengths: {handLengths}<br />
-            Max Hand Used: {Math.max(...handLengths)}
+            Max Hand Used: {handLengths.length === 0 ? 0 : Math.max(...handLengths)}
           </h3>
           <button id='next-layout' onClick={() => nextLayout(layoutIndex)}>
             <p>

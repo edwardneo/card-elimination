@@ -18,7 +18,7 @@ export function EndPage({ moveOrders, gameHands }: EndProps) {
       let layoutStr = '';
       layoutStr += `${layouts[i].board.length} ${layouts[i].board[0].length} `;
       layoutStr += layouts[i].board.reduce((layoutStr, row) => layoutStr + row, '');
-      let dataStr = `${moveOrders[i]} ${gameHands[i].join('')} ${Math.max(...gameHands[i])}`;
+      let dataStr = `${moveOrders[i]} ${gameHands[i].join('')} ${gameHands[i].length === 0 ? 0 : Math.max(...gameHands[i])}`;
 
       gameArr.push(layoutStr);
       gameArr.push(dataStr);
