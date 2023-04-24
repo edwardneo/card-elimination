@@ -23,12 +23,12 @@ export function EndPage({ moveOrders, gameHands }: EndProps) {
       gameArr.push(layoutStr);
       gameArr.push(dataStr);
     }
-    console.log("Sending experiment result:", gameArr);
-    window.parent.postMessage({ type: 'gameArr', data: gameArr }, '*');
     return gameArr;
   }
 
   const gameArr = makeGameArr(layouts, moveOrders, gameHands);
+  console.log("Sending experiment result:", gameArr);
+  window.parent.postMessage({ type: 'gameArr', data: gameArr }, '*');
 
   return (
     <div className='page'>
