@@ -27,6 +27,10 @@ export function EndPage({ moveOrders, gameHands }: EndProps) {
   }
 
   const gameArr = makeGameArr(layouts, moveOrders, gameHands);
+  const gameArrToSend = JSON.stringify(gameArr);
+  console.log("Sending experiment result:", gameArrToSend);
+  console.log("Type of experiment result:", typeof gameArrToSend);
+  window.parent.postMessage({ type: 'gameArr', data: gameArrToSend }, '*');
 
   return (
     <div className='page'>
