@@ -27,6 +27,8 @@ export function EndPage({ moveOrders, gameHands }: EndProps) {
   }
 
   const gameArr = makeGameArr(layouts, moveOrders, gameHands);
+  console.log(gameArr);
+  window.parent.postMessage({ type: 'gameArr', data: gameArr }, '*');
 
   return (
     <div className='page'>
