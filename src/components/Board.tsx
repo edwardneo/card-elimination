@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import { Card } from './Card';
+import { Timer } from './Timer';
 
 interface BoardProps {
   board: string[][],
@@ -10,6 +10,7 @@ export function Board({ board, takeCard }: BoardProps) {
   return (
     <div id='board'>
       {board.map((cardColors, index) => <Row key={index} cardColors={cardColors} takeCard={() => takeCard(index)} />)}
+      <Timer />
     </div>
   )
 }
@@ -33,7 +34,7 @@ function Row({ cardColors, takeCard }: RowProps) {
         />
       );
     }
-    if (cardColors.length != 0) {
+    if (cardColors.length !== 0) {
       cards.push(
         <Card
           className="stack last-card"

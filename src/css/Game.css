@@ -8,6 +8,18 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  position: relative;
+}
+
+#timer {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+#timer > * {
+  margin: 10px;
+  color: darkgray;
 }
 
 #hand {
