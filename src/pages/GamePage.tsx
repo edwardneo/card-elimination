@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import "../css/Game.css";
 
 import { Board } from "../components/Board";
@@ -8,13 +9,17 @@ import { EndPopup } from '../components/EndPopup';
 import { layouts } from '../data/Layouts';
 
 interface GameProps {
-  layoutIndex: number;
   addGameData(moveOrder: String, handLengths: number[]): void;
-  nextLayout(layoutIndex: number): void;
 }
 
-export function GamePage({ layoutIndex, addGameData, nextLayout }: GameProps) {
-  const colors = ['red', 'green', 'blue', 'yellow', 'violet', 'orange', 'cyan'];
+const colors = ['red', 'green', 'blue', 'yellow', 'violet', 'orange', 'cyan'];
+
+export function GamePage({ addGameData }: GameProps) {
+  const { layoutIndexStr } = useParams();
+  const navigate = useNavigate();
+
+  const layoutIndex = Number(layoutIndexStr);
+  console.log(layoutIndex);
 
   const startingHand: HandObject = colors.reduce((obj, color) => ({ ...obj, [color]: 0 }), {});
 
@@ -70,9 +75,9 @@ export function GamePage({ layoutIndex, addGameData, nextLayout }: GameProps) {
             Hand Lengths: {handLengths}<br />
             Max Hand Used: {handLengths.length === 0 ? 0 : Math.max(...handLengths)}
           </h3>
-          <button id='next-layout' onClick={() => nextLayout(layoutIndex)}>
+          <button id='next-layout' onClick={() => navigate('/')}>
             <p>
-              {layoutIndex === layouts.length - 1 ? "End" : `Layout ${layoutIndex + 2} of ${layouts.length}`}
+              Back to Start
             </p>
           </button>
         </EndPopup>) :
