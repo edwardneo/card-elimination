@@ -1,7 +1,7 @@
 {
   "name": "card-elimination",
   "version": "0.1.1",
-  "homepage": "https://ronyw7.github.io/card-elimination",
+  "homepage": "https://edwardneo.github.io/card-elimination",
   "private": true,
   "dependencies": {
     "@emotion-icons/boxicons-regular": "^3.19.0",
